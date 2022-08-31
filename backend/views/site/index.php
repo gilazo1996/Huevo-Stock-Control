@@ -15,6 +15,7 @@ $this->title = Yii::$app->name;
 
         <p></p>
         <p><a class="btn btn-lg btn-danger" href="<?php echo Url::toRoute(["producto/index"]);?>">Lista de productos</a></p>
+        <p><a class="btn btn-lg btn-success" href="<?php echo Url::toRoute(["venta/index"]);?>">Ventas</a></p>
     </div>
 
 </div>

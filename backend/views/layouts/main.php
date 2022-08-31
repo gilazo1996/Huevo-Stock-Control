@@ -66,12 +66,6 @@ AppAsset::register($this);
                         ['label' => 'Crear proveedor' , 'url' => ['proveedor/create']],
                     ],
                 ],
-                [
-                    'label' => 'Usuarios',  'items' => [
-                        ['label' => 'Lista usuario' , 'url' => ['usuario/index']], 
-                        ['label' => 'Crear usuario' , 'url' => ['usuario/create']],
-                    ],
-                ],
                 
                 ['label' => 'Administrar Usuarios', 'url' => ['/user']],
                 ['label' => 'Gii', 'url' => ['/gii']],   

@@ -102,7 +102,7 @@ return [
            'site/verification',
             //'site/*',
             //'admin/*',
-            //'gii/*',
+            'gii/*',
             //'user/*',
             //'rbac/*',
             //'report/*',

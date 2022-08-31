@@ -7,13 +7,14 @@ use Yii;
 /**
  * This is the model class for table "venta".
  *
+ * @property int $id
  * @property int $id_factura
  * @property int $id_producto
  * @property int $cantidad
  * @property float|null $precio_contado
  * @property int $total
  *
- * @property Factura $factura
+ * @property Factura[] $facturas
  * @property Producto $producto
  */
 class Venta extends \yii\db\ActiveRecord
@@ -45,6 +46,7 @@ class Venta extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
             'id_factura' => 'Id Factura',
             'id_producto' => 'Id Producto',
             'cantidad' => 'Cantidad',
@@ -54,13 +56,13 @@ class Venta extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Factura]].
+     * Gets query for [[Facturas]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFactura()
+    public function getFacturas()
     {
-        return $this->hasOne(Factura::className(), ['id' => 'id_factura']);
+        return $this->hasMany(Factura::className(), ['id_venta' => 'id']);
     }
 
     /**

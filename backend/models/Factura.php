@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "factura".
  *
  * @property int $id
+ * @property int $id_venta
  * @property int $id_cliente
  * @property string $fecha_pedido
  * @property int $subtotal
@@ -15,7 +16,7 @@ use Yii;
  * @property int $vendedor
  *
  * @property Cliente $cliente
- * @property Venta $id0
+ * @property Venta $venta
  */
 class Factura extends \yii\db\ActiveRecord
 {
@@ -33,13 +34,12 @@ class Factura extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'id_cliente', 'subtotal', 'region', 'vendedor'], 'required'],
-            [['id', 'id_cliente', 'subtotal', 'vendedor'], 'integer'],
+            [['id_venta', 'id_cliente', 'subtotal', 'region', 'vendedor'], 'required'],
+            [['id_venta', 'id_cliente', 'subtotal', 'vendedor'], 'integer'],
             [['fecha_pedido'], 'safe'],
             [['region'], 'string', 'max' => 100],
-            [['id'], 'unique'],
-            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Venta::className(), 'targetAttribute' => ['id' => 'id_factura']],
             [['id_cliente'], 'exist', 'skipOnError' => true, 'targetClass' => Cliente::className(), 'targetAttribute' => ['id_cliente' => 'id']],
+            [['id_venta'], 'exist', 'skipOnError' => true, 'targetClass' => Venta::className(), 'targetAttribute' => ['id_venta' => 'id']],
         ];
     }
 
@@ -50,6 +50,7 @@ class Factura extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'id_venta' => 'Id Venta',
             'id_cliente' => 'Id Cliente',
             'fecha_pedido' => 'Fecha Pedido',
             'subtotal' => 'Subtotal',
@@ -69,12 +70,12 @@ class Factura extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Id0]].
+     * Gets query for [[Venta]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getId0()
+    public function getVenta()
     {
-        return $this->hasOne(Venta::className(), ['id_factura' => 'id']);
+        return $this->hasOne(Venta::className(), ['id' => 'id_venta']);
     }
 }
