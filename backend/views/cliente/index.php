@@ -1,13 +1,14 @@
 <?php
 
+use backend\models\Cliente;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\ClienteSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var backend\models\ClienteSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Clientes';
 $this->params['breadcrumbs'][] = $this->title;

@@ -15,7 +15,7 @@ use Yii;
  * @property string|null $email
  * @property int|null $num_telefono
  *
- * @property Factura[] $facturas
+ * @property Venta[] $ventas
  */
 class Cliente extends \yii\db\ActiveRecord
 {
@@ -58,12 +58,12 @@ class Cliente extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Facturas]].
+     * Gets query for [[Ventas]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getFacturas()
+    public function getVentas()
     {
-        return $this->hasMany(Factura::className(), ['id_cliente' => 'id']);
+        return $this->hasMany(Venta::class, ['id_cliente' => 'id']);
     }
 }

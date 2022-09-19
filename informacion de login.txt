@@ -1,0 +1,15 @@
+
+NIVEL USUARIO DIOS:
+	USUARIO: 40429104
+	PASS: Versalles_2009
+------------------------------------------
+NIVEL USUARIO ADMIN
+	USUARIO: 27170139
+	PASS: Versalles_2009
+------------------------------------------
+NIVEL USUARIO COMUN
+	USUARIO: 20202022
+	PASS: Loredana_2020
+
+
+

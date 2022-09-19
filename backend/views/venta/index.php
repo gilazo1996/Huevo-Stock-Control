@@ -1,13 +1,14 @@
 <?php
 
+use backend\models\Venta;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel backend\models\VentaSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var yii\web\View $this */
+/** @var backend\models\VentaSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Ventas';
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,15 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'id_factura',
+            //'id',
+            'id_cliente',
             'id_producto',
-            'cantidad',
             'precio_contado',
-            //'total',
+            'cantidad',
+            'total',
+            'estado',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Venta $model, $key, $index, $column) {
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Producto */
+/** @var yii\web\View $this */
+/** @var backend\models\Producto $model */
 
 $this->title = 'Update Producto: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Productos', 'url' => ['index']];

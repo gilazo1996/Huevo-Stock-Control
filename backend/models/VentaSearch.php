@@ -17,7 +17,7 @@ class VentaSearch extends Venta
     public function rules()
     {
         return [
-            [['id', 'id_factura', 'id_producto', 'cantidad', 'total'], 'integer'],
+            [['id', 'id_cliente', 'id_producto', 'cantidad', 'total', 'estado'], 'integer'],
             [['precio_contado'], 'number'],
         ];
     }
@@ -59,11 +59,12 @@ class VentaSearch extends Venta
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_factura' => $this->id_factura,
+            'id_cliente' => $this->id_cliente,
             'id_producto' => $this->id_producto,
-            'cantidad' => $this->cantidad,
             'precio_contado' => $this->precio_contado,
+            'cantidad' => $this->cantidad,
             'total' => $this->total,
+            'estado' => $this->estado,
         ]);
 
         return $dataProvider;

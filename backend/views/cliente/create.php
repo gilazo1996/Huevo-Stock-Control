@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Cliente */
+/** @var yii\web\View $this */
+/** @var backend\models\Cliente $model */
 
 $this->title = 'Create Cliente';
 $this->params['breadcrumbs'][] = ['label' => 'Clientes', 'url' => ['index']];

@@ -3,14 +3,16 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Producto */
-/* @var $form yii\widgets\ActiveForm */
+/** @var yii\web\View $this */
+/** @var backend\models\Producto $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
 <div class="producto-form">
 
     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'id_proveedor')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 

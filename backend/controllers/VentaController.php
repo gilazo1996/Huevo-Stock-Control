@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Venta;
 use backend\models\VentaSearch;
+use backend\models\Producto;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,7 +25,7 @@ class VentaController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        'delete' => ['POST', 'getproducto'],
                     ],
                 ],
             ]
@@ -70,6 +71,11 @@ class VentaController extends Controller
         $model = new Venta();
 
         if ($this->request->isPost) {
+            
+            //$model->load($this->request->post());
+            //var_dump($model); die;
+            //$model->validate();
+            //var_dump($model->getErrors()); die;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -131,4 +137,15 @@ class VentaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionGetproducto()
+    {
+        $consult_prod = new Producto();
+
+        if ($producte = $_POST['id_product']) 
+        {
+            $data = $consult_prod->obtenerPrecio($producte);
+            echo json_encode($data);
+        }
+    }    
 }

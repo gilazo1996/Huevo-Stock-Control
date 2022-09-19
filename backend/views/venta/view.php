@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model backend\models\Venta */
+/** @var yii\web\View $this */
+/** @var backend\models\Venta $model */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Ventas', 'url' => ['index']];
@@ -30,11 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'id_factura',
+            'id_cliente',
             'id_producto',
-            'cantidad',
             'precio_contado',
+            'cantidad',
             'total',
+            'estado',
         ],
     ]) ?>
 

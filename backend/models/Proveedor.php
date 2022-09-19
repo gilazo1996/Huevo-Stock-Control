@@ -62,6 +62,6 @@ class Proveedor extends \yii\db\ActiveRecord
      */
     public function getProductos()
     {
-        return $this->hasMany(Producto::className(), ['id_proveedor' => 'id']);
+        return $this->hasMany(Producto::class, ['id_proveedor' => 'id']);
     }
 }
