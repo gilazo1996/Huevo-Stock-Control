@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-08-2022 a las 08:31:28
+-- Tiempo de generación: 21-09-2022 a las 02:54:52
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.0.13
 
@@ -167,10 +167,10 @@ INSERT INTO `cliente` (`id`, `dni`, `nombre`, `apellido`, `domicilio`, `email`, 
 
 CREATE TABLE `factura` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `id_venta` bigint(20) UNSIGNED NOT NULL,
   `id_cliente` bigint(20) UNSIGNED NOT NULL,
   `fecha_pedido` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `subtotal` int(11) NOT NULL,
-  `region` varchar(100) NOT NULL,
   `vendedor` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -282,12 +282,22 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 --
 
 CREATE TABLE `venta` (
-  `id_factura` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_cliente` bigint(20) UNSIGNED NOT NULL,
   `id_producto` bigint(20) UNSIGNED NOT NULL,
-  `cantidad` int(11) NOT NULL,
   `precio_contado` decimal(10,0) DEFAULT NULL,
-  `total` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`id`, `id_cliente`, `id_producto`, `precio_contado`, `cantidad`, `total`, `estado`) VALUES
+(1, 1, 2, '100', 2, 200, 0),
+(2, 2, 3, '25', 8, 200, 0);
 
 --
 -- Índices para tablas volcadas
@@ -332,7 +342,8 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `factura`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_cliente` (`id_cliente`);
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_venta` (`id_venta`);
 
 --
 -- Indices de la tabla `migration`
@@ -366,8 +377,9 @@ ALTER TABLE `user`
 -- Indices de la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD KEY `id_factura` (`id_factura`),
-  ADD KEY `id_producto` (`id_producto`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `id_cliente` (`id_cliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -378,6 +390,12 @@ ALTER TABLE `venta`
 --
 ALTER TABLE `cliente`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `factura`
+--
+ALTER TABLE `factura`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -396,6 +414,12 @@ ALTER TABLE `proveedor`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `venta`
+--
+ALTER TABLE `venta`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -421,13 +445,6 @@ ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id`) REFERENCES `venta` (`id_factura`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
@@ -437,7 +454,8 @@ ALTER TABLE `producto`
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `venta_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `venta_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
