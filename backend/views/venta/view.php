@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'precio_contado',
             'cantidad',
             'total',
+            'fecha_venta',
             'estado',
         ],
     ]) ?>

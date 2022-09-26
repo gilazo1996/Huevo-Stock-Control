@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Venta;
 use backend\models\VentaSearch;
+use backend\models\Cliente;
 use backend\models\Producto;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -70,14 +71,24 @@ class VentaController extends Controller
     {
         $model = new Venta();
 
+
         if ($this->request->isPost) {
             
             //$model->load($this->request->post());
             //var_dump($model); die;
             //$model->validate();
             //var_dump($model->getErrors()); die;
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+
+
+                date_default_timezone_set('America/Argentina/Buenos_Aires');  //ajusta el formato de fecha y hora del pais...
+                $fechi_vent = date('Y-m-d H:i:s', strtotime('now'));   //si uso 'today' en vez de 'now' solo aplica para la fecha, el horario no lo reconoce
+                //var_dump($fechi_vent); die;
+
+                $model->fecha_venta = $fechi_vent;
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
+
             }
         } else {
             $model->loadDefaultValues();
@@ -147,5 +158,16 @@ class VentaController extends Controller
             $data = $consult_prod->obtenerPrecio($producte);
             echo json_encode($data);
         }
-    }    
+    }
+    
+    public function actionReporte()
+    {
+        $nombreCliente = new Cliente();
+        $datosProducto = new Producto();
+        $fechaVenta = 0;
+
+
+        return $this->render('reporte');
+    }
 }
+

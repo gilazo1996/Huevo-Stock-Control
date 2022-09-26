@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'total') ?>
 
+    <?php // echo $form->field($model, 'fecha_venta') ?>
+
     <?php // echo $form->field($model, 'estado') ?>
 
     <div class="form-group">

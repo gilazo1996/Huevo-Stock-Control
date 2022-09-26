@@ -10,6 +10,18 @@ $producto = ArrayHelper::map($model->productos, 'id', 'nombre');
 
 $estado = ['0'=>'finalizado', '1'=>'pendiente'];
 
+	
+//setlocale(LC_ALL,"es_RA");
+//$fechata = date('d/m/Y');   $horata = date("H".":"."i");   $fechata_unix = time();   
+
+//$fechata_transf = strtotime("now");   $hoy = getdate($fechata_transf);
+//$fechi_vent = $hoy['year'].'-'.$hoy['mon'].'-'.$hoy['mday'].' '.$hoy['seconds'].':'.$hoy['minutes'].':'.$hoy['hours'];
+
+//$fechita = $hoy['hours'].':'.$hoy['minutes'].' - '.$hoy['weekday'].' '.$hoy['mday'].'/'.$hoy['mon'].'/'.$hoy['year'];
+//var_dump($fechi_vent); die;
+//2022-09-26 00:20:57
+
+
 /** @var yii\web\View $this */
 /** @var backend\models\Venta $model */
 /** @var yii\widgets\ActiveForm $form */
@@ -32,6 +44,8 @@ $estado = ['0'=>'finalizado', '1'=>'pendiente'];
     <?= $form->field($model, 'cantidad')->textInput(['type' => 'number', 'min'=>'1', 'id'=>'cantiUnit', 'onchange'=>'onStockPrice(this.value)']) ?>
 
     <?= $form->field($model, 'total')->textInput(['type' => 'number', 'id'=>'totalUnit', 'readonly'=>true]) ?>
+
+    <?php //$form->field($model, 'fecha_venta')->textInput() ?>
 
     <?= $form->field($model, 'estado')->dropDownList(($estado), ['prompt' => 'Seleccione estado de venta' ]); ?>
 
@@ -97,4 +111,3 @@ $estado = ['0'=>'finalizado', '1'=>'pendiente'];
     }
 
 </script>
-

@@ -19,6 +19,7 @@ class VentaSearch extends Venta
         return [
             [['id', 'id_cliente', 'id_producto', 'cantidad', 'total', 'estado'], 'integer'],
             [['precio_contado'], 'number'],
+            [['fecha_venta'], 'safe'],
         ];
     }
 
@@ -64,6 +65,7 @@ class VentaSearch extends Venta
             'precio_contado' => $this->precio_contado,
             'cantidad' => $this->cantidad,
             'total' => $this->total,
+            'fecha_venta' => $this->fecha_venta,
             'estado' => $this->estado,
         ]);
 
