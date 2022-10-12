@@ -34,8 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'nombre',
             'precio',
             'descuento',
-            //'categoria',
-            //'unidades',
+            'id_categoria',
+            'unidades',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
@@ -45,5 +45,26 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-
 </div>
+
+<style>
+    .table
+    {
+        color:white;
+    }
+
+    .filters
+    {
+        background-color: gray;
+    }
+
+    table>thead>tr>th>a
+    {
+        color:white;
+    }
+
+    table>a
+    {
+        color:white;
+    }
+</style>

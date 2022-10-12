@@ -35,7 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'apellido',
             'domicilio',
             //'email:email',
+            [
+                'attribute' => 'email',
+                'contentOptions' => ['style' => 'color:white'], // For TD
+            ],
             //'num_telefono',
+            [
+                'attribute' => 'num_telefono',
+                'contentOptions' => ['style' => 'color:white'], // For TD
+                'headerOptions' => ['class' => 'ur-class'] // For TH
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, $model, $key, $index, $column) {
@@ -45,5 +54,26 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-
 </div>
+
+<style>
+    .table
+    {
+        color:white;
+    }
+
+    .filters
+    {
+        background-color: gray;
+    }
+
+    table>thead>tr>th>a
+    {
+        color:white;
+    }
+
+    table>a
+    {
+        color:white;
+    }
+</style>

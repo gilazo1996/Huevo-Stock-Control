@@ -41,3 +41,25 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
 </div>
+
+<style>
+    .table
+    {
+        color:white;
+    }
+
+    .filters
+    {
+        background-color: gray;
+    }
+
+    table>thead>tr>th>a
+    {
+        color:white;
+    }
+
+    table>a
+    {
+        color:white;
+    }
+</style>

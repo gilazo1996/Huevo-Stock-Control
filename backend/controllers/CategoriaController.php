@@ -2,18 +2,16 @@
 
 namespace backend\controllers;
 
-use backend\models\Venta;
-use backend\models\VentaSearch;
-use backend\models\Cliente;
-use backend\models\Producto;
+use backend\models\Categoria;
+use backend\models\CategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * VentaController implements the CRUD actions for Venta model.
+ * CategoriaController implements the CRUD actions for Categoria model.
  */
-class VentaController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * @inheritDoc
@@ -26,7 +24,7 @@ class VentaController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST', 'getproducto'],
+                        'delete' => ['POST'],
                     ],
                 ],
             ]
@@ -34,13 +32,13 @@ class VentaController extends Controller
     }
 
     /**
-     * Lists all Venta models.
+     * Lists all Categoria models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new VentaSearch();
+        $searchModel = new CategoriaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,8 +48,8 @@ class VentaController extends Controller
     }
 
     /**
-     * Displays a single Venta model.
-     * @param string $id ID
+     * Displays a single Categoria model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -63,32 +61,17 @@ class VentaController extends Controller
     }
 
     /**
-     * Creates a new Venta model.
+     * Creates a new Categoria model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Venta();
-
+        $model = new Categoria();
 
         if ($this->request->isPost) {
-            
-            //$model->load($this->request->post());
-            //var_dump($model); die;
-            //$model->validate();
-            //var_dump($model->getErrors()); die;
-            if ($model->load($this->request->post())) {
-
-
-                date_default_timezone_set('America/Argentina/Buenos_Aires');  //ajusta el formato de fecha y hora del pais...
-                $fechi_vent = date('Y-m-d H:i:s', strtotime('now'));   //si uso 'today' en vez de 'now' solo aplica para la fecha, el horario no lo reconoce
-                //var_dump($fechi_vent); die;
-
-                $model->fecha_venta = $fechi_vent;
-                $model->save();
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
-
             }
         } else {
             $model->loadDefaultValues();
@@ -100,9 +83,9 @@ class VentaController extends Controller
     }
 
     /**
-     * Updates an existing Venta model.
+     * Updates an existing Categoria model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id ID
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -120,9 +103,9 @@ class VentaController extends Controller
     }
 
     /**
-     * Deletes an existing Venta model.
+     * Deletes an existing Categoria model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id ID
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -134,43 +117,18 @@ class VentaController extends Controller
     }
 
     /**
-     * Finds the Venta model based on its primary key value.
+     * Finds the Categoria model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id ID
-     * @return Venta the loaded model
+     * @param int $id ID
+     * @return Categoria the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Venta::findOne(['id' => $id])) !== null) {
+        if (($model = Categoria::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    public function actionGetproducto()
-    {
-        $consult_prod = new Producto();
-
-        if ($producte = $_POST['id_product']) 
-        {
-            $data = $consult_prod->obtenerPrecio($producte);
-            echo json_encode($data);
-        }
-    }
-    
-    public function actionReporte()
-    {
-        $searchModel = new VentaSearch();
-        $arrayProvider = $searchModel->getConsulta();   //var_dump($arrayProvider); die;
-        $dataProvider = $searchModel->searchReport($this->request->queryParams);
-
-        return $this->render('reporte', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'arrayProvider' => $arrayProvider,
-        ]);
-    }
 }
-

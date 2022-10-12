@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use backend\models\Producto;
+
+$proveedores = ArrayHelper::map($model->proveedores, 'id', 'nombre_prov');
+$categorias = ArrayHelper::map($model->categorias, 'id', 'nombre');
 
 /** @var yii\web\View $this */
 /** @var backend\models\Producto $model */
@@ -12,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_proveedor')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_proveedor')->dropDownList($proveedores, ['prompt' => 'Seleccione proveedor' ]); ?>
 
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
@@ -20,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'descuento')->textInput() ?>
 
-    <?= $form->field($model, 'categoria')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_categoria')->dropDownList($categorias, ['prompt' => 'Seleccione categoria' ]); ?>
 
     <?= $form->field($model, 'unidades')->textInput() ?>
 

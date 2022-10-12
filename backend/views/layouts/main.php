@@ -38,7 +38,7 @@ AppAsset::register($this);
                 style="vertical-align:top; height:5vh;"/>' . '&nbsp<h class="text-dark">'.Yii::$app->name.'</h></div>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
-                'class' => 'navbar navbar-expand-md navbar-dark bg-light fixed-top',
+                'class' => 'navbar navbar-expand-md navbar-light bg-light fixed-top',
             ],
         ]);
 
@@ -58,6 +58,7 @@ AppAsset::register($this);
                     'label' => 'Productos',  'items' => [
                         ['label' => 'Lista producto' , 'url' => ['producto/index']], 
                         ['label' => 'Crear producto' , 'url' => ['producto/create']],
+                        ['label' => 'Nueva categoria' , 'url' => ['categoria/create']],
                     ],
                 ],
                 [

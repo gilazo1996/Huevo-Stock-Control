@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-09-2022 a las 02:54:52
+-- Tiempo de generación: 12-10-2022 a las 18:24:43
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.0.13
 
@@ -137,6 +137,29 @@ CREATE TABLE `auth_rule` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id` smallint(5) UNSIGNED NOT NULL,
+  `nombre` varchar(70) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `nombre`) VALUES
+(1, 'Avicola'),
+(2, 'Legumbre'),
+(3, 'Cereal'),
+(4, 'Enlatado'),
+(5, 'Procesado'),
+(6, 'Lacteo');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cliente`
 --
 
@@ -157,7 +180,8 @@ CREATE TABLE `cliente` (
 INSERT INTO `cliente` (`id`, `dni`, `nombre`, `apellido`, `domicilio`, `email`, `num_telefono`) VALUES
 (1, 40439502, 'Alfonso', 'Grispino', 'Las Heras 2027', 'alfogris_1958@hotmail.com', 1127834388),
 (2, 30981283, 'Roberto', 'Fonseca', 'Chivilcoy 3060', 'robertman_fons@gmail.com', 1164832458),
-(3, 33567219, 'Apolinaria', 'Lechttermann', 'Sheldon 129', 'lechmann93_apol@gmail.com', 1567883241);
+(3, 33567219, 'Apolinaria', 'Lechttermann', 'Sheldon 129', 'lechmann93_apol@gmail.com', 1567883241),
+(4, 39207093, 'Jorjanio', 'Trochet', 'Vergola 340', 'trochojor9090@gmail.com', 1123428060);
 
 -- --------------------------------------------------------
 
@@ -210,7 +234,7 @@ CREATE TABLE `producto` (
   `nombre` varchar(100) NOT NULL,
   `precio` decimal(10,0) UNSIGNED DEFAULT NULL,
   `descuento` int(90) UNSIGNED DEFAULT NULL,
-  `categoria` varchar(70) DEFAULT NULL,
+  `id_categoria` smallint(5) UNSIGNED DEFAULT NULL,
   `unidades` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -218,10 +242,13 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id`, `id_proveedor`, `nombre`, `precio`, `descuento`, `categoria`, `unidades`) VALUES
-(1, 1, 'arroz la marisel', '150', 20, 'cereales', 45),
-(2, 1, 'queso fontina la paulina', '100', 25, 'quesos', 50),
-(3, 2, 'huevos colorados rangers', '25', 15, 'avicola', 60);
+INSERT INTO `producto` (`id`, `id_proveedor`, `nombre`, `precio`, `descuento`, `id_categoria`, `unidades`) VALUES
+(1, 1, 'arroz la marisel', '150', 20, 3, 45),
+(2, 1, 'queso fontina la paulina', '113', 25, 6, 50),
+(3, 2, 'huevos colorados rangers', '32', 15, 1, 80),
+(5, 1, 'Porotos El Cubero', '127', 15, 2, 94),
+(6, 2, 'Lentejas Roa', '119', 25, 2, 160),
+(7, 4, 'Miel Sindicato de abejas', '430', 10, 5, 55);
 
 -- --------------------------------------------------------
 
@@ -245,7 +272,8 @@ CREATE TABLE `proveedor` (
 INSERT INTO `proveedor` (`id`, `nombre_prov`, `contacto_prov`, `email`, `domicilio`, `num_telefono`) VALUES
 (1, 'Chema Industries', 'Gilardino Perez', 'chema_industries@arg.com', 'Minerva 3001', 1190125374),
 (2, 'Granja Loren', 'Benicio Di Lortto', 'dilortto.benihill@outlook.com', 'Farina 2018', 1123885463),
-(3, 'Peipo SA', 'Maximiliano Romanedino', 'peipo.snack.fun@arg.com', 'Coronel Sandler 1390', 1170723422);
+(3, 'Peipo SA', 'Maximiliano Romanedino', 'peipo.snack.fun@arg.com', 'Coronel Sandler 1390', 1170723422),
+(4, 'Melita', 'Juan Scognamiglio', 'melita_industria@outlook.com', 'Cadorcha 1230', 1128203050);
 
 -- --------------------------------------------------------
 
@@ -288,6 +316,7 @@ CREATE TABLE `venta` (
   `precio_contado` decimal(10,0) DEFAULT NULL,
   `cantidad` int(11) NOT NULL,
   `total` int(11) NOT NULL,
+  `fecha_venta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -295,9 +324,14 @@ CREATE TABLE `venta` (
 -- Volcado de datos para la tabla `venta`
 --
 
-INSERT INTO `venta` (`id`, `id_cliente`, `id_producto`, `precio_contado`, `cantidad`, `total`, `estado`) VALUES
-(1, 1, 2, '100', 2, 200, 0),
-(2, 2, 3, '25', 8, 200, 0);
+INSERT INTO `venta` (`id`, `id_cliente`, `id_producto`, `precio_contado`, `cantidad`, `total`, `fecha_venta`, `estado`) VALUES
+(3, 3, 1, '150', 3, 450, '2022-09-26 03:20:57', 0),
+(7, 2, 1, '150', 3, 450, '2022-09-27 01:14:17', 0),
+(11, 3, 5, '113', 4, 452, '2022-09-26 20:32:17', 0),
+(15, 3, 3, '25', 25, 625, '2022-09-26 16:18:50', 0),
+(16, 2, 3, '25', 30, 750, '2022-09-29 00:52:54', 0),
+(17, 4, 7, '430', 1, 430, '2022-09-30 14:19:56', 0),
+(18, 4, 5, '127', 4, 508, '2022-10-12 12:21:07', 0);
 
 --
 -- Índices para tablas volcadas
@@ -332,6 +366,12 @@ ALTER TABLE `auth_rule`
   ADD PRIMARY KEY (`name`);
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
@@ -356,7 +396,8 @@ ALTER TABLE `migration`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_proveedor` (`id_proveedor`);
+  ADD KEY `id_proveedor` (`id_proveedor`),
+  ADD KEY `categoria` (`id_categoria`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -386,10 +427,16 @@ ALTER TABLE `venta`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -401,13 +448,13 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -419,7 +466,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
@@ -448,7 +495,8 @@ ALTER TABLE `auth_item_child`
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `venta`

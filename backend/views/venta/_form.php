@@ -21,7 +21,6 @@ $estado = ['0'=>'finalizado', '1'=>'pendiente'];
 //var_dump($fechi_vent); die;
 //2022-09-26 00:20:57
 
-
 /** @var yii\web\View $this */
 /** @var backend\models\Venta $model */
 /** @var yii\widgets\ActiveForm $form */

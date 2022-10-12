@@ -12,14 +12,28 @@ use Yii;
  * @property string $nombre
  * @property float|null $precio
  * @property int|null $descuento
- * @property string|null $categoria
+ * @property int|null $id_categoria
  * @property int|null $unidades
  *
+ * @property Categoria $categoria
  * @property Proveedor $proveedor
  * @property Venta[] $ventas
  */
 class Producto extends \yii\db\ActiveRecord
 {
+    public $proveedores = [];
+    public $categorias = [];
+
+    public function init()
+    {
+        $proveedores = new Proveedor();
+        $this->proveedores = $proveedores->find()->all();
+
+        $categorias = new Categoria();
+        $this->categorias = $categorias->find()->all();
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -35,11 +49,11 @@ class Producto extends \yii\db\ActiveRecord
     {
         return [
             [['id_proveedor', 'nombre'], 'required'],
-            [['id_proveedor', 'descuento', 'unidades'], 'integer'],
+            [['id_proveedor', 'descuento', 'id_categoria', 'unidades'], 'integer'],
             [['precio'], 'number'],
             [['nombre'], 'string', 'max' => 100],
-            [['categoria'], 'string', 'max' => 70],
             [['id_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedor::class, 'targetAttribute' => ['id_proveedor' => 'id']],
+            [['id_categoria'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::class, 'targetAttribute' => ['id_categoria' => 'id']],
         ];
     }
 
@@ -54,9 +68,19 @@ class Producto extends \yii\db\ActiveRecord
             'nombre' => 'Nombre',
             'precio' => 'Precio',
             'descuento' => 'Descuento',
-            'categoria' => 'Categoria',
+            'id_categoria' => 'Id Categoria',
             'unidades' => 'Unidades',
         ];
+    }
+
+    /**
+     * Gets query for [[Categoria]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoria()
+    {
+        return $this->hasOne(Categoria::class, ['id' => 'id_categoria']);
     }
 
     /**
@@ -79,6 +103,7 @@ class Producto extends \yii\db\ActiveRecord
         return $this->hasMany(Venta::class, ['id_producto' => 'id']);
     }
 
+
     public function obtenerPrecio($received)
     {
         $command = "SELECT precio
@@ -89,5 +114,10 @@ class Producto extends \yii\db\ActiveRecord
 
         $data = Yii::$app->db->createCommand($command)->queryAll();
         return $data;
-    }    
+    }
+    
+    public function devolverProducto()
+    {
+
+    }
 }
