@@ -14,6 +14,7 @@ use Yii;
  * @property int|null $descuento
  * @property int|null $id_categoria
  * @property int|null $unidades
+ * @property int|null $minimo_unidades
  *
  * @property Categoria $categoria
  * @property Proveedor $proveedor
@@ -49,7 +50,7 @@ class Producto extends \yii\db\ActiveRecord
     {
         return [
             [['id_proveedor', 'nombre'], 'required'],
-            [['id_proveedor', 'descuento', 'id_categoria', 'unidades'], 'integer'],
+            [['id_proveedor', 'descuento', 'id_categoria', 'unidades', 'minimo_unidades'], 'integer'],
             [['precio'], 'number'],
             [['nombre'], 'string', 'max' => 100],
             [['id_proveedor'], 'exist', 'skipOnError' => true, 'targetClass' => Proveedor::class, 'targetAttribute' => ['id_proveedor' => 'id']],
@@ -70,6 +71,7 @@ class Producto extends \yii\db\ActiveRecord
             'descuento' => 'Descuento',
             'id_categoria' => 'Id Categoria',
             'unidades' => 'Unidades',
+            'minimo_unidades' => 'Minimo stock',
         ];
     }
 
@@ -116,8 +118,27 @@ class Producto extends \yii\db\ActiveRecord
         return $data;
     }
     
-    public function devolverProducto()
+    public function obtenerStock($id_prod)
     {
+        $command = "SELECT unidades, minimo_unidades
 
+        FROM producto
+
+        WHERE producto.id = $id_prod";
+
+        $data = Yii::$app->db->createCommand($command)->queryAll();
+        return $data;
+    }
+
+    public function resta_deVenta($id_prod, $valQueResta)
+    {
+        $command = "UPDATE producto
+
+        SET unidades = (unidades - ".$valQueResta.")
+
+        WHERE producto.id = $id_prod";
+
+        $data = Yii::$app->db->createCommand($command)->queryAll();
+        return $data;
     }
 }

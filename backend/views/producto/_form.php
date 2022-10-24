@@ -29,6 +29,8 @@ $categorias = ArrayHelper::map($model->categorias, 'id', 'nombre');
 
     <?= $form->field($model, 'unidades')->textInput() ?>
 
+    <?= $form->field($model, 'minimo_unidades')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

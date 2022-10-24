@@ -9,13 +9,20 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\ProductoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Reportes';
+$this->title = 'Reporte ventas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="reporte-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="d-flex justify-content-start">
+        <h1><?= Html::encode($this->title) ?></h1>
+        
+        &nbsp; &nbsp;
+        <p>
+            <a class="btn btn-warning m-2" href="<?php echo Url::toRoute(["producto/reportestock"]);?>">Reporte Stock</a>
+        </p>
+    </div>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <?php //var_dump($arrayProvider); die; ?>

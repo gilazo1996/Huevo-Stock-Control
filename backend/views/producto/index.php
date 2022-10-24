@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'descuento',
             'id_categoria',
             'unidades',
+            'minimo_unidades',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, $model, $key, $index, $column) {

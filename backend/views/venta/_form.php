@@ -71,6 +71,7 @@ $estado = ['0'=>'finalizado', '1'=>'pendiente'];
         var total_precio = document.getElementById('totalUnit');
         total_precio.value = 0;
         campo_stock.value = 0;
+        var unidades_prod = 0;
 
         //console.log(url + '/producto/findModel');
 
@@ -91,6 +92,25 @@ $estado = ['0'=>'finalizado', '1'=>'pendiente'];
                 console.log("Error");
             }
         })
+
+        // $.ajax({
+        //     url: url + '/venta/getstockproducto',
+        //     type: 'POST',
+        //     data: {
+        //         id_product: id_product
+        //     },
+        //     success: function(res) {
+        //         JSON.stringify(res);
+        //         dfinal = res.replace(/[^0-9]+/g, "");
+        //         unidades_prod = dfinal;
+        //         //console(dfinal);
+        //     },
+        //     error: function() {
+        //         console.log("Error");
+        //     }
+        // })
+
+        // console(unidades_prod);
     }
 
     function onStockPrice(canti_prods)
@@ -105,7 +125,6 @@ $estado = ['0'=>'finalizado', '1'=>'pendiente'];
         var val_total = (campo_precio.value * campo_stock);
         var campo_stock_2 = document.getElementById('cantiUnit');
         total_precio.value = val_total;
-
 
     }
 

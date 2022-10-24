@@ -131,4 +131,17 @@ class ProductoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionReportestock()
+    {
+        $searchModel = new ProductoSearch();
+        //$arrayProvider = $searchModel->getConsulta();   //var_dump($arrayProvider); die;
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('reportestock', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            
+        ]);
+    }
 }

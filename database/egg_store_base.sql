@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-10-2022 a las 18:24:43
+-- Tiempo de generación: 24-10-2022 a las 18:39:25
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.0.13
 
@@ -181,7 +181,8 @@ INSERT INTO `cliente` (`id`, `dni`, `nombre`, `apellido`, `domicilio`, `email`, 
 (1, 40439502, 'Alfonso', 'Grispino', 'Las Heras 2027', 'alfogris_1958@hotmail.com', 1127834388),
 (2, 30981283, 'Roberto', 'Fonseca', 'Chivilcoy 3060', 'robertman_fons@gmail.com', 1164832458),
 (3, 33567219, 'Apolinaria', 'Lechttermann', 'Sheldon 129', 'lechmann93_apol@gmail.com', 1567883241),
-(4, 39207093, 'Jorjanio', 'Trochet', 'Vergola 340', 'trochojor9090@gmail.com', 1123428060);
+(4, 39207093, 'Jorjanio', 'Trochet', 'Vergola 340', 'trochojor9090@gmail.com', 1123428060),
+(5, 23431233, 'Hermegildo', 'Achaval', 'Sheldon 1222', 'herm100@hotmail.com', 1156478823);
 
 -- --------------------------------------------------------
 
@@ -235,20 +236,22 @@ CREATE TABLE `producto` (
   `precio` decimal(10,0) UNSIGNED DEFAULT NULL,
   `descuento` int(90) UNSIGNED DEFAULT NULL,
   `id_categoria` smallint(5) UNSIGNED DEFAULT NULL,
-  `unidades` int(10) UNSIGNED DEFAULT NULL
+  `unidades` int(10) UNSIGNED DEFAULT NULL,
+  `minimo_unidades` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id`, `id_proveedor`, `nombre`, `precio`, `descuento`, `id_categoria`, `unidades`) VALUES
-(1, 1, 'arroz la marisel', '150', 20, 3, 45),
-(2, 1, 'queso fontina la paulina', '113', 25, 6, 50),
-(3, 2, 'huevos colorados rangers', '32', 15, 1, 80),
-(5, 1, 'Porotos El Cubero', '127', 15, 2, 94),
-(6, 2, 'Lentejas Roa', '119', 25, 2, 160),
-(7, 4, 'Miel Sindicato de abejas', '430', 10, 5, 55);
+INSERT INTO `producto` (`id`, `id_proveedor`, `nombre`, `precio`, `descuento`, `id_categoria`, `unidades`, `minimo_unidades`) VALUES
+(1, 1, 'arroz la marisel', '150', 20, 3, 15, 15),
+(2, 1, 'queso fontina la paulina', '113', 25, 6, 50, 10),
+(3, 2, 'huevos colorados rangers', '32', 15, 1, 80, 20),
+(5, 1, 'Porotos El Cubero', '127', 15, 2, 10, 10),
+(6, 2, 'Lentejas Roa', '119', 25, 2, 160, 10),
+(7, 4, 'Miel Sindicato de abejas', '430', 10, 5, 55, 8),
+(8, 1, 'Polenta Kuka', '343', 15, 3, 200, 15);
 
 -- --------------------------------------------------------
 
@@ -331,7 +334,14 @@ INSERT INTO `venta` (`id`, `id_cliente`, `id_producto`, `precio_contado`, `canti
 (15, 3, 3, '25', 25, 625, '2022-09-26 16:18:50', 0),
 (16, 2, 3, '25', 30, 750, '2022-09-29 00:52:54', 0),
 (17, 4, 7, '430', 1, 430, '2022-09-30 14:19:56', 0),
-(18, 4, 5, '127', 4, 508, '2022-10-12 12:21:07', 0);
+(18, 4, 5, '127', 4, 508, '2022-10-12 12:21:07', 0),
+(19, 5, 6, '119', 2, 238, '2022-10-12 16:34:35', 0),
+(20, 5, 8, '343', 3, 1029, '2022-10-13 00:32:44', 0),
+(21, 2, 1, '150', 15, 2250, '2022-10-17 16:09:41', 0),
+(22, 1, 5, '127', 84, 10668, '2022-10-17 16:50:19', 0),
+(23, 4, 1, '150', 28, 4200, '2022-10-24 13:24:26', 0),
+(24, 5, 1, '150', 13, 1950, '2022-10-24 13:37:09', 0),
+(25, 1, 1, '150', 1, 150, '2022-10-24 13:38:37', 0);
 
 --
 -- Índices para tablas volcadas
@@ -436,7 +446,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -448,7 +458,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -466,7 +476,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas
