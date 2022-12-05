@@ -98,9 +98,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th scope='row'>".($conti+1)."</th>
                             <td scope='row'>".($arrayProvider[$conti]['nom_cliente'])."</td>
                             <td scope='row'>".($arrayProvider[$conti]['nom_producto'])."</td>
-                            <td scope='row'>".($arrayProvider[$conti]['precio_contado'])."</td>
+                            <td scope='row'>".("$".$arrayProvider[$conti]['precio_contado'])."</td>
                             <td scope='row'>".($arrayProvider[$conti]['cantidad'])."</td>
-                            <td scope='row'>".($arrayProvider[$conti]['total'])."</td>
+                            <td scope='row'>".("$".$arrayProvider[$conti]['total'])."</td>
                             <td scope='row'>".($arrayProvider[$conti]['fecha_venta'])."</td>
                             <td scope='row'>".($arrayProvider[$conti]['estado'])."</td>
                         </tr>";   $conti++;

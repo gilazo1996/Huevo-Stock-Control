@@ -115,7 +115,9 @@ AppAsset::register($this);
         }
         else 
         {
-            $menuItems = [];
+            $menuItems = [
+                ['label' => 'Iniciar sesión', 'url' => ['site/login']],
+            ];
         }
 
         if (!Yii::$app->user->isGuest) 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2022 a las 18:39:25
+-- Tiempo de generación: 05-12-2022 a las 15:47:32
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.0.13
 
@@ -245,7 +245,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id`, `id_proveedor`, `nombre`, `precio`, `descuento`, `id_categoria`, `unidades`, `minimo_unidades`) VALUES
-(1, 1, 'arroz la marisel', '150', 20, 3, 15, 15),
+(1, 1, 'arroz la marisel', '150', 20, 3, 13, 15),
 (2, 1, 'queso fontina la paulina', '113', 25, 6, 50, 10),
 (3, 2, 'huevos colorados rangers', '32', 15, 1, 80, 20),
 (5, 1, 'Porotos El Cubero', '127', 15, 2, 10, 10),
@@ -304,7 +304,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
 (1, '40429104', 'luZ-AYRfOo44MF5X91WIgpHFM-DIYYtc', '$2y$13$B7jYPVB09WW/Z4ltHoqVTeisLofbMuJte78M4YZV3qr9o2bLTKoFW', NULL, 'gaston_roa@live.com', 10, 1661484847, 1661464800, NULL),
 (2, '27170139', 'NKugKQpiMXivz2i4HDDdmXrI1Gx6dc6z', '$2y$13$Od1yz9V3W8I.HSdd7u.tnepmLGFoPWKxgeGcR4BzWHZQMYmmocxbq', NULL, 'gilazo1996@gmail.com', 10, 1661491810, 1661464800, NULL),
-(3, '20202022', 'wGFxA-9GnoPA4lZVv4PCuZMXJpC5t6wF', '$2y$13$7Y8qmfz9teHGB9rBv6ORGuBjUJNXy1AxXzUt6vIEcIjFzK1e5MY82', NULL, 'gerr2014android@gmail.com', 10, 1661523203, 1661523203, 'YR0mTT2arjZsJn0GW8KuWj3lGbcD9tyg_1661523203');
+(3, '20202022', 'wGFxA-9GnoPA4lZVv4PCuZMXJpC5t6wF', '$2y$13$7Y8qmfz9teHGB9rBv6ORGuBjUJNXy1AxXzUt6vIEcIjFzK1e5MY82', NULL, 'gerr2014android@gmail.com', 10, 1661523203, 1661523203, 'YR0mTT2arjZsJn0GW8KuWj3lGbcD9tyg_1661523203'),
+(4, '40403030', 'FuhLr10D_apUHSZdF-Hzlaav5Zq-aloK', '$2y$13$nLa4yDeR3iabhad.qNWAm.iV6X/xF0e1SlJtEY3yaMECI2fT2hpZa', 'ePSbrPHySG7gkCng0Y6Nh7Kg-HWxyZh2_1669426304', 'davidfbcardozoemma@gmail.com', 9, 1669426303, 1669426303, 'YlNxuia5zXIOAVscu0BmbKXn_C0t8z62_1669426304');
 
 -- --------------------------------------------------------
 
@@ -341,7 +342,10 @@ INSERT INTO `venta` (`id`, `id_cliente`, `id_producto`, `precio_contado`, `canti
 (22, 1, 5, '127', 84, 10668, '2022-10-17 16:50:19', 0),
 (23, 4, 1, '150', 28, 4200, '2022-10-24 13:24:26', 0),
 (24, 5, 1, '150', 13, 1950, '2022-10-24 13:37:09', 0),
-(25, 1, 1, '150', 1, 150, '2022-10-24 13:38:37', 0);
+(25, 1, 1, '150', 1, 150, '2022-10-24 13:38:37', 0),
+(26, 4, 1, '150', 2, 300, '2022-10-26 14:16:07', 1),
+(27, 5, 1, '150', 1, 150, '2022-10-26 14:17:01', 0),
+(28, 1, 1, '150', 2, 300, '2022-10-26 14:18:45', 0);
 
 --
 -- Índices para tablas volcadas
@@ -470,13 +474,13 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Restricciones para tablas volcadas

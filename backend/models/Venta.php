@@ -66,8 +66,8 @@ class Venta extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_cliente' => 'Id Cliente',
-            'id_producto' => 'Id Producto',
+            'id_cliente' => 'Cliente',
+            'id_producto' => 'Producto',
             'precio_contado' => 'Precio Contado',
             'cantidad' => 'Cantidad',
             'total' => 'Total',
