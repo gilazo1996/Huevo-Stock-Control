@@ -9,9 +9,8 @@ $this->title = Yii::$app->name;
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Bienvenido!</h1>
 
-        <p class="lead">Control de inventario.</p>
+        <p class="lead">Seleccione una de las entradas.</p><br>
 
         <p></p>
         <p><a class="btn btn-lg btn-danger col-5" href="<?php echo Url::toRoute(["producto/index"]);?>">Lista de productos</a></p>

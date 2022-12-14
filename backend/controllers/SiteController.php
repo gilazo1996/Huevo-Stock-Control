@@ -83,7 +83,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index', ['imagen' => $this->imagen,]);
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->render('index', ['imagen' => $this->imagen,]);
+        }
+        else
+        {
+            return $this->render('index-no-login', ['imagen' => $this->imagen,]);
+        }
     }
 
     /**
@@ -123,7 +130,7 @@ class SiteController extends Controller
 
         //return $this->goHome();
 
-        return $this->redirect(['login']);
+        return $this->render('index-no-login', ['imagen' => $this->imagen,]);
     }
 
 
